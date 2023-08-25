@@ -1,0 +1,7 @@
+{
+  "name": "NumberInputIssue",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
