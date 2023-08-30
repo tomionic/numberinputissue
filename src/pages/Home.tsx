@@ -1,18 +1,28 @@
-import { IonContent, IonInput, IonPage, IonText } from '@ionic/react';
-import { useState } from 'react';
+import { IonButton, IonContent, IonPage } from '@ionic/react';
+import { useForm } from 'react-hook-form';
+import HookInput from '../hook-wrappers/HookInput';
 
 const Home: React.FC = () => {
-  const [ value, setValue ] = useState<string | null | undefined>();
+  const { control, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: {
+      test: ""
+    }
+  });
+  const submitForm = (formData: any) => {
+    console.log(formData);
+  }
   return (
     <IonPage className="ion-padding-top">
       <IonContent fullscreen className="ion-padding">
-        <IonInput
-          label='Input'
-          value={ value }
+        <HookInput
+          control={ control }
+          errors={ errors }
+          label="Test input"
+          configKey="test"
           type="number"
-          onIonInput={ event => setValue(event.detail.value) }
+          requiredError="This fiels is required"
         />
-        <IonText>{ `Output value: ${value}` }</IonText>
+        <IonButton expand="full" onClick={ handleSubmit(submitForm) }>Submit</IonButton>
       </IonContent>
     </IonPage>
   );
